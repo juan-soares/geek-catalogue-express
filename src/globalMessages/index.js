@@ -5,7 +5,7 @@ const globalMessages = {
   consultSuccess: "Consulta realizada com Sucesso!",
   consultFail: "Não posssível consultar. Erro: ",
 
-  consultNotFound: "Registro não encontrado",
+  consultNotFound: "Registro não encontrado.",
 };
 
 module.exports = globalMessages;
