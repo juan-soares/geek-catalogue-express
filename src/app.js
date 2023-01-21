@@ -4,6 +4,7 @@ const connectMongoDB = require("./config/db/mongo");
 
 const searchRoutes = require("./routes/search");
 const userRoutes = require("./routes/user");
+const categoryRoutes = require("./routes/category");
 
 const app = express();
 
@@ -18,5 +19,6 @@ app.get("/", (req, res) => {
 
 app.use("/search", searchRoutes);
 app.use("/user", userRoutes);
+app.use("/category", categoryRoutes);
 
 module.exports = app;
