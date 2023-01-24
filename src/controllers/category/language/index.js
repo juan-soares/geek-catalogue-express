@@ -1,12 +1,12 @@
-const Subcategory = require("../../../models/category/subcategory");
+const Language = require("../../../models/category/language");
 const globalMessages = require("../../../globalMessages");
 
-async function getSubcategories(req, res) {
+async function getLanguages(req, res) {
   try {
-    const SubcategoriesList = await Subcategory.find({});
+    const languagesList = await Language.find({});
     res.status(200).json({
       message: globalMessages.consultSuccess,
-      data: SubcategoriesList,
+      data: languagesList,
     });
   } catch (error) {
     res
@@ -15,14 +15,14 @@ async function getSubcategories(req, res) {
   }
 }
 
-async function postSubcategory(req, res) {
-  const newSubcategory = new Subcategory({
+async function postLanguage(req, res) {
+  const newLanguage = new Language({
     name: req.body.name,
   });
 
   try {
-    await newSubcategory.save();
-    const updatedList = await Subcategory.find({});
+    await newLanguage.save();
+    const updatedList = await Language.find({});
     res
       .status(200)
       .json({ message: globalMessages.saveSuccess, data: updatedList });
@@ -33,20 +33,20 @@ async function postSubcategory(req, res) {
   }
 }
 
-async function putSubcategory(req, res) {
-  const updateSubcategory = {
+async function putLanguage(req, res) {
+  const updateLanguage = {
     name: req.body.name,
   };
 
   try {
-    const updatedSubcategory = await Subcategory.findByIdAndUpdate(
+    const updatedLanguage = await Language.findByIdAndUpdate(
       req.body._id,
-      updateSubcategory,
+      updateLanguage,
       { new: true }
     );
     res
       .status(200)
-      .json({ message: globalMessages.saveSuccess, data: updatedSubcategory });
+      .json({ message: globalMessages.saveSuccess, data: updatedLanguage });
   } catch (error) {
     res
       .status(400)
@@ -54,10 +54,10 @@ async function putSubcategory(req, res) {
   }
 }
 
-async function deleteSubcategory(req, res) {
+async function deleteLanguage(req, res) {
   try {
-    await Subcategory.findByIdAndDelete(req.body._id);
-    const updatedList = await Subcategory.find({});
+    await Language.findByIdAndDelete(req.body._id);
+    const updatedList = await Language.find({});
 
     res
       .status(200)
@@ -70,8 +70,8 @@ async function deleteSubcategory(req, res) {
 }
 
 module.exports = {
-  getSubcategories,
-  postSubcategory,
-  putSubcategory,
-  deleteSubcategory,
+  getLanguages,
+  postLanguage,
+  putLanguage,
+  deleteLanguage,
 };
