@@ -21,12 +21,13 @@ async function postUser(req, res) {
     if (searchedUser.length && searchedUser[0].password === req.body.password) {
       res.status(200).json({
         message: globalMessages.consultSuccess,
-        data: searchedUser[0].nickname,
+        data: { nickname: searchedUser[0].nickname },
       });
     } else {
-      res
-        .status(404)
-        .json({ message: globalMessages.consultNotFound, data: "" });
+      res.status(404).json({
+        message: globalMessages.consultNotFound,
+        data: { nickname: "" },
+      });
     }
   } catch (error) {
     res

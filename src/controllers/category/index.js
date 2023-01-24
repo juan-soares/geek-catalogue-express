@@ -4,6 +4,7 @@ const globalMessages = require("../../globalMessages");
 async function getCategories(req, res) {
   try {
     const categoriesList = await Category.find({}).populate("subcategories");
+
     res
       .status(200)
       .json({ message: globalMessages.consultSuccess, data: categoriesList });
@@ -14,16 +15,22 @@ async function getCategories(req, res) {
   }
 }
 
-async function postCategories(req, res) {
-  const newCategory = new Category({
+async function putCategory(req, res) {
+  const updateCategory = {
     name: req.body.name,
-  });
+    subcategories: req.body.subcategories,
+  };
 
   try {
-    //const savedNewCategory = await newCategory.save();
+    const updatedCategory = await Category.findByIdAndUpdate(
+      req.body._id,
+      updateCategory,
+      { new: true }
+    );
+
     res
       .status(200)
-      .json({ message: globalMessages.saveSuccess, data: newCategory });
+      .json({ message: globalMessages.saveSuccess, data: updatedCategory });
   } catch (error) {
     res
       .status(400)
@@ -31,4 +38,4 @@ async function postCategories(req, res) {
   }
 }
 
-module.exports = { getCategories, postCategories };
+module.exports = { getCategories, putCategory };
