@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Subcategory = require("./subcategory");
+const Language = require("./language");
 
 const categorySchema = new mongoose.Schema(
   {
@@ -8,6 +9,13 @@ const categorySchema = new mongoose.Schema(
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: Subcategory,
+        required: true,
+      },
+    ],
+    languages: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: Language,
         required: true,
       },
     ],
