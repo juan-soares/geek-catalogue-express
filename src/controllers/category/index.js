@@ -3,7 +3,9 @@ const globalMessages = require("../../globalMessages");
 
 async function getCategories(req, res) {
   try {
-    const categoriesList = await Category.find({}).populate("subcategories");
+    const categoriesList = await Category.find({})
+      .populate("subcategories")
+      .populate("languages");
 
     res
       .status(200)
