@@ -20,8 +20,21 @@ async function getCategories(req, res) {
 async function putCategory(req, res) {
   const updateCategory = {
     name: req.body.name,
-    subcategories: req.body.subcategories,
+    //subcategories: req.body.subcategories,
   };
+
+  const subcategories = req.body.subcategories.map((sub) => sub._id);
+
+  Object.keys(req.body).map((key) => {
+    if (
+      key === "_id" ||
+      key === "name" ||
+      key === "updatedAt" ||
+      key === "createdAt"
+    )
+      return;
+    updateCategory[key] = req.body[key].map((i) => i._id);
+  });
 
   try {
     const updatedCategory = await Category.findByIdAndUpdate(
