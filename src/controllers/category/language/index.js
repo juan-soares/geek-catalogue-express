@@ -56,6 +56,11 @@ async function putLanguage(req, res) {
 
 async function deleteLanguage(req, res) {
   try {
+    const categoryCollection = await Category.find({});
+    categoryCollection.map(async (item) => {
+      item.languages.find((s) => s !== req.body._id);
+      await Category.findByIdAndUpdate(item._id, item);
+    });
     await Language.findByIdAndDelete(req.body._id);
     const updatedList = await Language.find({});
 

@@ -1,3 +1,4 @@
+const Category = require("../../../models/category");
 const Subcategory = require("../../../models/category/subcategory");
 const globalMessages = require("../../../globalMessages");
 
@@ -56,6 +57,12 @@ async function putSubcategory(req, res) {
 
 async function deleteSubcategory(req, res) {
   try {
+    const categoryCollection = await Category.find({});
+    categoryCollection.map(async (item) => {
+      item.subcategories.find((s) => s !== req.body._id);
+      await Category.findByIdAndUpdate(item._id, item);
+    });
+
     await Subcategory.findByIdAndDelete(req.body._id);
     const updatedList = await Subcategory.find({});
 

@@ -57,6 +57,11 @@ async function putMovimentation(req, res) {
 
 async function deleteMovimentation(req, res) {
   try {
+    const categoryCollection = await Category.find({});
+    categoryCollection.map(async (item) => {
+      item.movimentations.find((s) => s !== req.body._id);
+      await Category.findByIdAndUpdate(item._id, item);
+    });
     await Movimentation.findByIdAndDelete(req.body._id);
     const updatedList = await Movimentation.find({});
 

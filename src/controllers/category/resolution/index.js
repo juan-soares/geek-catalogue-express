@@ -56,6 +56,11 @@ async function putResolution(req, res) {
 
 async function deleteResolution(req, res) {
   try {
+    const categoryCollection = await Category.find({});
+    categoryCollection.map(async (item) => {
+      item.resolutions.find((s) => s !== req.body._id);
+      await Category.findByIdAndUpdate(item._id, item);
+    });
     await Resolution.findByIdAndDelete(req.body._id);
     const updatedList = await Resolution.find({});
 

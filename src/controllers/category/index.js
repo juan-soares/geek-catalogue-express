@@ -20,10 +20,7 @@ async function getCategories(req, res) {
 async function putCategory(req, res) {
   const updateCategory = {
     name: req.body.name,
-    //subcategories: req.body.subcategories,
   };
-
-  const subcategories = req.body.subcategories.map((sub) => sub._id);
 
   Object.keys(req.body).map((key) => {
     if (
@@ -33,6 +30,7 @@ async function putCategory(req, res) {
       key === "createdAt"
     )
       return;
+      
     updateCategory[key] = req.body[key].map((i) => i._id);
   });
 

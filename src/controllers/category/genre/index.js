@@ -56,6 +56,11 @@ async function putGenre(req, res) {
 
 async function deleteGenre(req, res) {
   try {
+    const categoryCollection = await Category.find({});
+    categoryCollection.map(async (item) => {
+      item.genres.find((s) => s !== req.body._id);
+      await Category.findByIdAndUpdate(item._id, item);
+    });
     await Genre.findByIdAndDelete(req.body._id);
     const updatedList = await Genre.find({});
 

@@ -56,6 +56,11 @@ async function putEdition(req, res) {
 
 async function deleteEdition(req, res) {
   try {
+    const categoryCollection = await Category.find({});
+    categoryCollection.map(async (item) => {
+      item.editions.find((s) => s !== req.body._id);
+      await Category.findByIdAndUpdate(item._id, item);
+    });
     await Edition.findByIdAndDelete(req.body._id);
     const updatedList = await Edition.find({});
 
