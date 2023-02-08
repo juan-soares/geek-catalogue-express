@@ -1,3 +1,4 @@
+const Category = require("../../../models/category");
 const Movimentation = require("../../../models/category/movimentation");
 const globalMessages = require("../../../globalMessages");
 

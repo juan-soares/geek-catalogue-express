@@ -1,3 +1,4 @@
+const Category = require("../../../models/category");
 const Resolution = require("../../../models/category/resolution");
 const globalMessages = require("../../../globalMessages");
 

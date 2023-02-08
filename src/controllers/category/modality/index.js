@@ -1,3 +1,4 @@
+const Category = require("../../../models/category");
 const Modality = require("../../../models/category/modality");
 const globalMessages = require("../../../globalMessages");
 

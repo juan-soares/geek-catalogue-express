@@ -1,3 +1,4 @@
+const Category = require("../../../models/category");
 const Genre = require("../../../models/category/genre");
 const globalMessages = require("../../../globalMessages");
 
